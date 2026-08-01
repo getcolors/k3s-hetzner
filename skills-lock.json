@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "package-k3s-green": {
+      "source": "getcolors/k3s",
+      "sourceType": "github",
+      "skillPath": "skills/package-k3s-green/SKILL.md",
+      "computedHash": "43391fa5524d7dd364add0bb2603511e8bb982758ea4db071bb8565c54db9fa3"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+# Desired state for the K3s deployment. Keep secret values in
+# .envrc.private as COLORS_PAR_* variables, never in this file.
+
+# Names the work directory and remote state keys. Never export
+# COLORS_PAR_PROFILE: an environment overlay could redirect this project to
+# another profile's state.
+profile: k3s-hetzner
+workdir: .colors
+
+provider-compute: hcloud
+provider-backend: r2
+
+# Protect the server from an accidental delete. Override this for one
+# intentional deletion rather than changing the committed desired state.
+compute-prevent-destroy: true
+
+# Public Git repository watched by Flux. The default branch is main and the
+# Kubernetes manifests live under k8s/.
+repository: https://github.com/getcolors/k3s-helloworld.git
+
+# Pin installation to the current K3s stable release rather than allowing two
+# creates at different times to install different Kubernetes versions.
+k3s-version: v1.36.2+k3s1
+flux-version: v2.9.2
+
+# --- Hetzner Cloud ----------------------------------------------------------
+
+# A small but practical single-node cluster: two shared x86 vCPUs, 4 GB RAM,
+# and Ubuntu LTS in Hetzner's location nearest the existing Frankfurt stack.
+hcloud-name: k3s-hetzner
+hcloud-image: ubuntu-24.04
+hcloud-server-type: cx23
+hcloud-location: nbg1
+
+# Existing Hetzner key matching the local ~/.ssh/id_ed25519.pub. The compute
+# template references it by name rather than creating or storing key material.
+hcloud-ssh-keys: 32617+amiorin@users.noreply.github.com
+
+# --- Cloudflare R2 state backend -------------------------------------------
+
+# Shared safely with the other deployments because state is keyed by profile
+# and stage, beginning with k3s-hetzner/k3s-compute.
+r2-bucket: tofu-state-319271fed8bc6d2d9059362be1165f37-eu
+r2-endpoint: https://319271fed8bc6d2d9059362be1165f37.eu.r2.cloudflarestorage.com

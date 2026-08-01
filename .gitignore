@@ -1,0 +1,12 @@
+# Exclude dotfiles by default so credentials and generated state cannot be
+# committed merely because a new private file was not explicitly listed.
+.*
+
+# Safe project metadata that belongs in source control.
+!.envrc
+!.gitignore
+!.agents
+!.claude
+!.github
+
+node_modules/
