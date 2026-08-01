@@ -10,20 +10,20 @@ K3s and Flux, OpenTofu state in the shared Cloudflare R2 bucket, and the public
 committed. `.envrc.private` contains credentials and is ignored by the
 Default-deny `.gitignore`.
 
-The root `k3s` launcher is a copy of
-`.claude/skills/package-k3s-green/k3s`, installed from `getcolors/k3s` and
+The root `green` launcher is a copy of
+`.claude/skills/package-k3s-green/green`, installed from `getcolors/k3s` and
 recorded in `skills-lock.json`. After `npx skills update -p -y`, re-copy it or
 the root keeps running the old pin.
 
 ## Commands
 
 ```sh
-./k3s build
-./k3s create --dry-run
-./k3s create
-./k3s kubectl get nodes
-./k3s kubectl get pods -A
-./k3s kubectl apply -f - < manifest.yml
+./green build
+./green create --dry-run
+./green create
+./green kubectl get nodes
+./green kubectl get pods -A
+./green kubectl apply -f - < manifest.yml
 ```
 
 A real delete is protected. It destroys the VPS and its boot disk and requires
@@ -46,7 +46,7 @@ committed `compute-prevent-destroy: true` to bypass the guard.
 
 The attached Hetzner firewall allows ICMP and TCP 22/80/443 only. K3s listens on
 6443 locally, but that port is closed publicly. Do not open it; use
-`./k3s kubectl`, which runs `sudo k3s kubectl` over the managed SSH alias.
+`./green kubectl`, which runs `sudo k3s kubectl` over the managed SSH alias.
 
 ## State and credentials
 
@@ -68,10 +68,10 @@ not prove a real provider login works.
 
 ```sh
 curl https://www.bigconfig.website/healthz
-./k3s kubectl -n flux-system get gitrepository,kustomization,helmrepository
-./k3s kubectl get helmrelease -A
-./k3s kubectl get clusterissuer,certificate -A
-./k3s kubectl -n k3s-helloworld get deployment,pods,ingress
+./green kubectl -n flux-system get gitrepository,kustomization,helmrepository
+./green kubectl get helmrelease -A
+./green kubectl get clusterissuer,certificate -A
+./green kubectl -n k3s-helloworld get deployment,pods,ingress
 ```
 
 Expected: node Ready, Flux and both Helm releases Ready, ClusterIssuer and
