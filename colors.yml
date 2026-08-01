@@ -8,6 +8,9 @@ profile: k3s-hetzner
 workdir: .colors
 
 provider-compute: hcloud
+# The package streams the token from .envrc.private into Kubernetes Secrets;
+# Flux-deployed ExternalDNS and cert-manager use it for this zone.
+provider-dns: cloudflare
 provider-backend: r2
 
 # Protect the server from an accidental delete. Override this for one
