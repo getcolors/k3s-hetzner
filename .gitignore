@@ -5,6 +5,7 @@
 # Safe project metadata that belongs in source control.
 !.envrc
 !.gitignore
+!.nojekyll
 !.agents
 !.claude
 !.github
