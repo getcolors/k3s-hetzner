@@ -45,3 +45,10 @@ hcloud-ssh-keys: 32617+amiorin@users.noreply.github.com
 # and stage, beginning with k3s-hetzner/k3s-compute.
 r2-bucket: tofu-state-319271fed8bc6d2d9059362be1165f37-eu
 r2-endpoint: https://319271fed8bc6d2d9059362be1165f37.eu.r2.cloudflarestorage.com
+
+# Existing key identity documented alongside hcloud-ssh-keys.
+ssh-private-key-path: ~/.ssh/id_ed25519
+
+# Preserve the IPv4 ingress policy of the previous package firewall.
+compute-ssh-sources: [0.0.0.0/0]
+compute-http-sources: [0.0.0.0/0]
