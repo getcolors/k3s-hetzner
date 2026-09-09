@@ -11,7 +11,7 @@ committed. `.envrc.private` contains credentials and is ignored by the
 Default-deny `.gitignore`.
 
 The root `green` launcher is a copy of
-`.claude/skills/package-k3s-green/green`, installed from `getcolors/k3s` and
+`.agents/skills/package-k3s-green/green`, installed from `getcolors/k3s` and
 recorded in `skills-lock.json`. After `npx skills update -p -y`, re-copy it or
 the root keeps running the old pin.
 
@@ -50,8 +50,10 @@ The attached Hetzner firewall allows ICMP and TCP 22/80/443 only. K3s listens on
 
 ## State and credentials
 
-Remote state is `k3s-hetzner/k3s-compute.tfstate`. The profile and stage both
-differ from other packages sharing the bucket.
+Legacy compute state is `k3s-hetzner/k3s-compute.tfstate`. The new library
+uses `k3s-hetzner/compute/` for shared state, node state, and coordination.
+Follow compute-migration.md before real operations; the payload refresh did
+not transfer live state.
 
 Never export `COLORS_PAR_PROFILE`. The package refuses it because the overlay
 could redirect this deployment at another project's state. Hetzner, R2, and Cloudflare
