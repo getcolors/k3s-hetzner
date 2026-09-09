@@ -1,6 +1,6 @@
 # Shared compute migration
 
-Installed `getcolors/k3s` revision `37b7fc14fdcbfd30f2534299f77e7bf1c6412def`. Root launchers match the
+Installed `getcolors/k3s` revision `218a64a5fb5849297ad06f37a49a42163235a6c0`. Root launchers match the
 installed skill payloads from a verified Skills CLI installation.
 The existing lockfile records that installation.
 
@@ -23,3 +23,8 @@ builds do not establish live authentication, migrated state, or application heal
 Configuration changes:
 
 - Made the documented external identity and existing IPv4 ingress policy explicit. Public Kubernetes API access remains closed.
+
+The repeated-delete fix accepts only a validated destroyed deployment result
+for delete, then stops before cleanup. Credential checks still run first.
+No key files or state were read to validate this payload refresh; a sanitized
+temporary build passed, and the committed desired-state bytes are unchanged.
